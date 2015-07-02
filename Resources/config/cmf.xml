@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="dos.cmf.dynamic_router.class">Symfony\Cmf\Component\Routing\DynamicRouter</parameter>
+        <parameter key="dos.cmf.generator.class">DoS\CernelBundle\Routing\SyliusAwareGenerator</parameter>
+        <parameter key="dos.cmf.route_provider.class">DoS\CernelBundle\Routing\RouteProvider</parameter>
+    </parameters>
+
+    <services>
+        <service id="dos.cmf.dynamic_router" class="%dos.cmf.dynamic_router.class%">
+            <argument type="service" id="router.request_context"/>
+            <argument type="service" id="dos.cmf.nested_matcher" />
+            <argument type="service" id="dos.cmf.route_generator" />
+            <argument>%dos.cmf.route_uri_filter_regexp%</argument>
+            <argument type="service" id="event_dispatcher" on-invalid="ignore"/>
+            <argument type="service" id="dos.cmf.route_provider"/>
+            <call method="addRouteEnhancer">
+                <argument type="service" id="dos.cmf.enhancer.controllers_by_class"/>
+                <argument>100</argument>
+            </call>
+            <call method="addRouteEnhancer">
+                <argument type="service" id="dos.cmf.enhancer.dos.cmf_by_class"/>
+                <argument>100</argument>
+            </call>
+        </service>
+
+        <service id="dos.cmf.nested_matcher" class="%cmf_routing.nested_matcher.class%">
+            <argument type="service" id="dos.cmf.route_provider" />
+            <argument type="service" id="cmf_routing.final_matcher"/>
+        </service>
+
+        <service id="dos.cmf.route_generator" class="%dos.cmf.generator.class%">
+            <argument type="service" id="dos.cmf.route_provider" />
+            <argument type="service" id="logger" on-invalid="ignore" />
+            <call method="setRouteConfig">
+                <argument>%dos.cmf.route_classes%</argument>
+            </call>
+        </service>
+
+        <service id="dos.cmf.route_provider" class="%dos.cmf.route_provider.class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="doctrine"/>
+            <argument>%dos.cmf.route_classes%</argument>
+            <call method="setRouteCollectionLimit"><argument>%dos.cmf.route_collection_limit%</argument></call>
+        </service>
+
+        <service id="dos.cmf.enhancer.controllers_by_class" class="%cmf_routing.enhancer.field_by_class.class%">
+            <argument>_dos.cmf_entity</argument>
+            <argument>_controller</argument>
+            <argument>%dos.cmf.controller_by_classes%</argument>
+        </service>
+
+        <service id="dos.cmf.enhancer.dos.cmf_by_class" class="%cmf_routing.enhancer.field_by_class.class%">
+            <argument>_dos.cmf_entity</argument>
+            <argument>_dos.cmf</argument>
+            <argument>%dos.cmf_by_classes%</argument>
+        </service>
+    </services>
+</container>

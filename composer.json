@@ -1,0 +1,33 @@
+{
+    "name": "liverbool/dos-cernel-bundle",
+    "description": "Cernel Bundle for Symfony",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ツ Liverbool",
+            "email": "nukboon@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "liverbool/dos-resource-bundle": "0.15.*@dev"
+    },
+    "require-dev": {
+        "liil/kint": "1.0",
+        "phpspec/phpspec": "~2.1"
+    },
+    "autoload": {
+        "psr-4": { "DoS\\CernelBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "DoS\\CernelBundle\\spec\\": "spec/" }
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.15-dev"
+        }
+    }
+}
