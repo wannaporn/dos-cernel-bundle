@@ -35,14 +35,18 @@ EOT
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln(sprintf($this->infos[1], $this->getEnvironment()));
+        $cmfEnabled = $this->getParameter('dos.cmf.enabled');
 
         if (!$this->isDatabasePresent()) {
             $commands = array(
                 'doctrine:database:create',
                 'doctrine:schema:create',
                 'cache:clear',
-                'doctrine:phpcr:repository:init'
             );
+
+            if ($cmfEnabled) {
+                $commands[] = 'doctrine:phpcr:repository:init';
+            }
 
             $this->runCommands($commands, $input, $output);
 
@@ -68,7 +72,10 @@ EOT
         }
 
         $commands[] = 'cache:clear';
-        $commands[] = 'doctrine:phpcr:repository:init';
+
+        if ($cmfEnabled) {
+            $commands[] = 'doctrine:phpcr:repository:init';
+        }
 
         $this->runCommands($commands, $input, $output);
 

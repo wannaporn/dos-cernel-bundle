@@ -24,6 +24,8 @@ class DoSCernelExtension extends Extension
             $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
             $loader->load('cmf.xml');
         }
+
+        $container->setParameter('dos.cmf.enabled', $config['cmf']['enabled']);
     }
 
     /**

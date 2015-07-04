@@ -20,7 +20,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('cmf')
                     ->addDefaultsIfNotSet()
                     ->children()
-                       ->booleanNode('enabled')->defaultFalse()->cannotBeEmpty()->end()
+                       ->booleanNode('enabled')->defaultFalse()->end()
                     ->end()
                 ->end()
             ->end()
