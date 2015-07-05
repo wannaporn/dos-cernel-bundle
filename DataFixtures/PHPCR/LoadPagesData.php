@@ -1,6 +1,6 @@
 <?php
 
-namespace Sylius\Bundle\FixturesBundle\DataFixtures\PHPCR;
+namespace DoS\CernelBundle\DataFixtures\PHPCR;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use DoS\CernelBundle\DataFixtures\DataFixture;
