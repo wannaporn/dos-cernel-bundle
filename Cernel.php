@@ -22,6 +22,7 @@ class Cernel extends Kernel
     public function registerBundles()
     {
         $bundles = array(
+            /*
             new \Sonata\BlockBundle\SonataBlockBundle(),
             new \Symfony\Cmf\Bundle\CoreBundle\CmfCoreBundle(),
             new \Symfony\Cmf\Bundle\BlockBundle\CmfBlockBundle(),
@@ -30,6 +31,9 @@ class Cernel extends Kernel
             new \Symfony\Cmf\Bundle\MenuBundle\CmfMenuBundle(),
             new \Symfony\Cmf\Bundle\CreateBundle\CmfCreateBundle(),
             new \Symfony\Cmf\Bundle\MediaBundle\CmfMediaBundle(),
+            new \Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
+            new \Sylius\Bundle\ContentBundle\SyliusContentBundle(),
+            */
 
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
@@ -41,7 +45,6 @@ class Cernel extends Kernel
 
             new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
-            new \Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
 
             new \DoS\CernelBundle\DoSCernelBundle(),
             new \DoS\ResourceBundle\DoSResourceBundle(),
@@ -58,7 +61,6 @@ class Cernel extends Kernel
             new \Sylius\Bundle\RbacBundle\SyliusRbacBundle(),
             new \Sylius\Bundle\UserBundle\SyliusUserBundle(),
             new \Sylius\Bundle\ApiBundle\SyliusApiBundle(),
-            new \Sylius\Bundle\ContentBundle\SyliusContentBundle(),
 
             new \Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new \FOS\OAuthServerBundle\FOSOAuthServerBundle(),
