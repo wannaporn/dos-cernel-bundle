@@ -22,7 +22,6 @@ class Cernel extends Kernel
     public function registerBundles()
     {
         $bundles = array(
-            /*
             new \Sonata\BlockBundle\SonataBlockBundle(),
             new \Symfony\Cmf\Bundle\CoreBundle\CmfCoreBundle(),
             new \Symfony\Cmf\Bundle\BlockBundle\CmfBlockBundle(),
@@ -33,7 +32,6 @@ class Cernel extends Kernel
             new \Symfony\Cmf\Bundle\MediaBundle\CmfMediaBundle(),
             new \Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
             new \Sylius\Bundle\ContentBundle\SyliusContentBundle(),
-            */
 
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
