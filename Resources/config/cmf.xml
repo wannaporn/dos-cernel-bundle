@@ -9,9 +9,15 @@
         <parameter key="dos.cmf.dynamic_router.class">Symfony\Cmf\Component\Routing\DynamicRouter</parameter>
         <parameter key="dos.cmf.generator.class">DoS\CernelBundle\Routing\SyliusAwareGenerator</parameter>
         <parameter key="dos.cmf.route_provider.class">DoS\CernelBundle\Routing\RouteProvider</parameter>
+        <parameter key="dos.cmf.form.image.type.class">DoS\CernelBundle\Form\Type\ImageType</parameter>
+        <parameter key="dos.cmf.persistence.phpcr.manager.class">DoS\CernelBundle\Doctrine\Phpcr\MediaManager</parameter>
     </parameters>
 
     <services>
+        <service id="dos.cmf.form.image.type" class="%dos.cmf.form.image.type.class%" parent="sylius.form.type.image">
+            <tag name="form.type" alias="dos_image" />
+        </service>
+
         <service id="dos.cmf.dynamic_router" class="%dos.cmf.dynamic_router.class%">
             <argument type="service" id="router.request_context"/>
             <argument type="service" id="dos.cmf.nested_matcher" />
