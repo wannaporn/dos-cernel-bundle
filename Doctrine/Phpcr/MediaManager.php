@@ -6,6 +6,7 @@ use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use PHPCR\Util\PathHelper;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\MediaManager as BaseMediaManager;
+use Symfony\Cmf\Bundle\MediaBundle\MediaInterface;
 
 class MediaManager extends BaseMediaManager
 {
@@ -34,7 +35,7 @@ class MediaManager extends BaseMediaManager
         if ($dm->find($class, $path)) {
             // path already exists
             $ext = pathinfo($media->getName(), PATHINFO_EXTENSION);
-            $media->setName(sha1($media->getName()) . '_' . time() . '_' . rand() . ($ext ? '.' . $ext : ''));
+            $media->setName(md5($media->getName()) . '_' . time() . '_' . rand() . ($ext ? '.' . $ext : ''));
         }
         if (!$media->getParent()) {
             $parent = $dm->find(null, PathHelper::getParentPath($path));
