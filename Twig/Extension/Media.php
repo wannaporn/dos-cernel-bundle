@@ -21,6 +21,18 @@ class Media extends SyliusImageExtension
     /**
      * {@inheritdoc}
      */
+    public function getFilters() {
+        return array(
+            new \Twig_SimpleFilter('twig_image_url',
+                array($this, 'getImageUrl'),
+                array('is_safe' => array('html'))
+            ),
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'twig_cmf_media';
