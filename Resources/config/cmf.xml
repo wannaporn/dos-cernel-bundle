@@ -11,11 +11,16 @@
         <parameter key="dos.cmf.route_provider.class">DoS\CernelBundle\Routing\RouteProvider</parameter>
         <parameter key="dos.cmf.form.image.type.class">DoS\CernelBundle\Form\Type\ImageType</parameter>
         <parameter key="dos.cmf.persistence.phpcr.manager.class">DoS\CernelBundle\Doctrine\Phpcr\MediaManager</parameter>
+        <parameter key="dos.cmf.twig.extension.media.class">DoS\CernelBundle\Twig\Extension\Media</parameter>
     </parameters>
 
     <services>
         <service id="dos.cmf.form.image.type" class="%dos.cmf.form.image.type.class%" parent="sylius.form.type.image">
             <tag name="form.type" alias="dos_image" />
+        </service>
+
+        <service id="dos.cmf.twig.extension.media" class="dos.cmf.twig.extension.media.class" parent="sylius.twig.extension.image">
+            <tag name="twig.extension"/>
         </service>
 
         <service id="dos.cmf.dynamic_router" class="%dos.cmf.dynamic_router.class%">
