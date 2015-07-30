@@ -10,6 +10,7 @@
         <parameter key="dos.requirements.settings.class">DoS\CernelBundle\Requirement\SettingsRequirements</parameter>
         <parameter key="dos.requirements.extensions.class">DoS\CernelBundle\Requirement\ExtensionsRequirements</parameter>
         <parameter key="dos.requirements.filesystem.class">DoS\CernelBundle\Requirement\FilesystemRequirements</parameter>
+        <parameter key="dos.liip_imagine.controller.class">DoS\CernelBundle\Controller\ImagineController</parameter>
     </parameters>
 
     <services>
