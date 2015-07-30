@@ -6,7 +6,27 @@ use Sylius\Bundle\MediaBundle\Twig\Extension\SyliusImageExtension;
 
 class Media extends SyliusImageExtension
 {
+    /**
+     * @var string
+     * @see liip_imagine.filters
+     */
     protected $filterPrefix = 'size_';
+
+    /**
+     * @var string
+     * @see Resources/routing/liip_imagine.xml
+     */
+    protected $routePrefix = '/m/c/r/';
+
+    /**
+     * @param string $filterPrefix
+     * @param string $routePrefix
+     */
+    public function setPrefixs($filterPrefix, $routePrefix)
+    {
+        $this->filterPrefix = $filterPrefix;
+        $this->routePrefix = $routePrefix;
+    }
 
     /**
      * {@inheritdoc}
@@ -53,7 +73,11 @@ class Media extends SyliusImageExtension
             );
         }
 
-        return parent::getImageUrl($image, $options, $default);
+        return str_replace(
+            $this->routePrefix . $this->filterPrefix,
+            $this->routePrefix,
+            parent::getImageUrl($image, $options, $default)
+        );
     }
 
     /**

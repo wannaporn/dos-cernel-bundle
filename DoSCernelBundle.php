@@ -23,5 +23,6 @@ class DoSCernelBundle extends AbstractBundle
     public function build(ContainerBuilder $builder)
     {
         $builder->addCompilerPass(new Compiler\CmfMediaPhpcrManagerPass());
+        $builder->addCompilerPass(new Compiler\LiipImagineControllerPass());
     }
 }
