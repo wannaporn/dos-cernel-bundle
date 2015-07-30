@@ -21,7 +21,6 @@ class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                        ->booleanNode('enabled')->defaultFalse()->end()
-                       ->booleanNode('custom_nameing')->defaultTrue()->end()
                     ->end()
                 ->end()
             ->end()

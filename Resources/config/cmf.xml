@@ -17,6 +17,12 @@
     <services>
         <service id="dos.cmf.form.image.type" class="%dos.cmf.form.image.type.class%" parent="sylius.form.type.image">
             <tag name="form.type" alias="dos_image" />
+            <call method="setUploadFileHelper">
+                <argument type="service" id="cmf_media.upload_image_helper"/>
+            </call>
+            <call method="setMediaRoot">
+                <argument>%cmf_media.persistence.phpcr.media_basepath%</argument>
+            </call>
         </service>
 
         <service id="dos.cmf.twig.extension.media" class="%dos.cmf.twig.extension.media.class%" parent="sylius.twig.extension.image">

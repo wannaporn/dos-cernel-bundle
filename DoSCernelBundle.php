@@ -22,7 +22,16 @@ class DoSCernelBundle extends AbstractBundle
      */
     public function build(ContainerBuilder $builder)
     {
-        $builder->addCompilerPass(new Compiler\CmfMediaPhpcrManagerPass());
         $builder->addCompilerPass(new Compiler\LiipImagineControllerPass());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getModelInterfaces()
+    {
+        return array(
+            'DoS\CernelBundle\Model\MediaInterface' => 'sylius.model.image.class',
+        );
     }
 }

@@ -26,7 +26,6 @@ class DoSCernelExtension extends Extension
         }
 
         $container->setParameter('dos.cmf.enabled', $config['cmf']['enabled']);
-        $container->setParameter('dos.cmf.custom_nameing', $config['cmf']['custom_nameing']);
     }
 
     /**
