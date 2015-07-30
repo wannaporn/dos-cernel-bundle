@@ -54,7 +54,7 @@ EOT
             Cernel::ENV_PROD => '/'
         );
 
-        $output->writeln('<info>Sylius has been successfully installed.</info>');
+        $output->writeln('<info>Project has been successfully installed.</info>');
         $output->writeln(sprintf('You can now open your store at the following path under the website root: <info>%s.</info>', $map[$this->getEnvironment()]));
     }
 }
