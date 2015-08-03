@@ -54,6 +54,10 @@ class ImageType extends BaseImageType
             ->addEventListener(FormEvents::SUBMIT, function(FormEvent $event) {
                 /** @var MediaPathAwareInterface $media */
                 if ($parent = $event->getForm()->getParent()) {
+                    if (!$parent = $parent->getParent()) {
+                        return;
+                    }
+
                     if (!$media = $parent->getData()) {
                         return;
                     }
