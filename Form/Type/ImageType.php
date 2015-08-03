@@ -3,7 +3,7 @@
 namespace DoS\CernelBundle\Form\Type;
 
 use DoS\CernelBundle\Doctrine\Phpcr\ManagerHelper;
-use DoS\CernelBundle\Model\MediaInterface;
+use DoS\CernelBundle\Model\MediaPathAwareInterface;
 use Sylius\Bundle\MediaBundle\Form\Type\ImageType as BaseImageType;
 use Symfony\Cmf\Bundle\MediaBundle\File\UploadFileHelperDoctrine;
 use Symfony\Cmf\Bundle\MediaBundle\File\UploadFileHelperInterface;
@@ -52,11 +52,13 @@ class ImageType extends BaseImageType
 
         $builder->get('media')
             ->addEventListener(FormEvents::SUBMIT, function(FormEvent $event) {
-                /** @var MediaInterface $media */
+                /** @var MediaPathAwareInterface $media */
                 if ($parent = $event->getForm()->getParent()) {
-                    $media = $parent->getData();
+                    if (!$media = $parent->getData()) {
+                        return;
+                    }
 
-                    if ($path = $media->getPath()) {
+                    if ($path = $media->getMediaPath()) {
                         $dirs = ManagerHelper::mkdirs($this->documentManager, $this->mediaRoot . $path);
                         $this->uploadFileHelper->setRootPath(end($dirs)->getId());
                     }
