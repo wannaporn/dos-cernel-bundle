@@ -52,17 +52,16 @@ class ImageType extends BaseImageType
 
         $builder->get('media')
             ->addEventListener(FormEvents::SUBMIT, function(FormEvent $event) {
-                /** @var MediaPathAwareInterface $media */
                 if ($parent = $event->getForm()->getParent()) {
                     if (!$parent = $parent->getParent()) {
                         return;
                     }
 
-                    if (!$media = $parent->getData()) {
+                    if (!($mediaAware = $parent->getData()) instanceof MediaPathAwareInterface) {
                         return;
                     }
 
-                    if ($path = $media->getMediaPath()) {
+                    if ($path = $mediaAware->getMediaPath()) {
                         $dirs = ManagerHelper::mkdirs($this->documentManager, $this->mediaRoot . $path);
                         $this->uploadFileHelper->setRootPath(end($dirs)->getId());
                     }
@@ -73,6 +72,25 @@ class ImageType extends BaseImageType
                 $this->uploadFileHelper->setRootPath($this->mediaRoot);
             })
         ;
+
+        # FIXME: remove when https://github.com/Sylius/Sylius/pull/2975 was fix.
+        # @see parent => Sylius/Bundle/MediaBundle/Form/Type/ImageType
+        $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+            /** @var MediaInterface $data */
+            $data = $event->getData();
+
+            if (null !== ($media = $data->getMedia())) {
+                $mediaId = $media->getId() ?: $media->getParentDocument()->getId() .'/'. $media->getNodename();
+                if ($mediaId !== $data->getMediaId()) {
+                    // This actually helps trigger preUpdate doctrine event since
+                    // doctrine is not tracking changes on $media field of Image entity.
+                    //
+                    // Here we forcefully update $mediaId (which is tracked by doctrine) to trigger
+                    // a change if a new media has been uploaded/selected.
+                    $data->setMediaId($mediaId);
+                }
+            }
+        });
     }
 
     /**
