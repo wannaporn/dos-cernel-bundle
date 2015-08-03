@@ -51,6 +51,7 @@ class ImageType extends BaseImageType
         }
 
         $builder->get('media')
+            // add media path
             ->addEventListener(FormEvents::SUBMIT, function(FormEvent $event) {
                 if ($parent = $event->getForm()->getParent()) {
                     if (!$parent = $parent->getParent()) {
