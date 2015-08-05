@@ -3,13 +3,16 @@
 namespace DoS\CernelBundle\Form\Type;
 
 use DoS\CernelBundle\Doctrine\Phpcr\ManagerHelper;
+use DoS\CernelBundle\Model\MediaInterface;
 use DoS\CernelBundle\Model\MediaPathAwareInterface;
+use Sylius\Bundle\MediaBundle\Form\DataTransformer\PathToDocumentTransformer;
 use Sylius\Bundle\MediaBundle\Form\Type\ImageType as BaseImageType;
 use Symfony\Cmf\Bundle\MediaBundle\File\UploadFileHelperDoctrine;
 use Symfony\Cmf\Bundle\MediaBundle\File\UploadFileHelperInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ImageType extends BaseImageType
 {
@@ -44,7 +47,15 @@ class ImageType extends BaseImageType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
+        if ($options['preview'] === true) {
+            $options['preview'] = 'image_upload_thumbnail';
+        }
+
+        $builder->add(
+            $builder
+                ->create('media', 'cmf_media_image', array('label' => false, 'imagine_filter' => $options['preview']))
+                ->addViewTransformer(new PathToDocumentTransformer($this->documentManager))
+        );
 
         if (!$this->uploadFileHelper) {
             return;
@@ -92,6 +103,18 @@ class ImageType extends BaseImageType
                 }
             }
         });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        parent::setDefaultOptions($resolver);
+
+        $resolver->setDefaults(array(
+            'preview' => false, # liip_imagine_filter or true
+        ));
     }
 
     /**
