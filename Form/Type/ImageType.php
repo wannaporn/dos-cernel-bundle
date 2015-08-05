@@ -89,7 +89,9 @@ class ImageType extends BaseImageType
         # @see parent => Sylius/Bundle/MediaBundle/Form/Type/ImageType
         $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
             /** @var MediaInterface $data */
-            $data = $event->getData();
+            if (!$data = $event->getData()) {
+                return;
+            }
 
             if (null !== ($media = $data->getMedia())) {
                 $mediaId = $media->getId() ?: $media->getParentDocument()->getId() .'/'. $media->getNodename();
