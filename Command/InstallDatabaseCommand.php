@@ -122,13 +122,7 @@ EOT
      */
     private function getDatabaseName()
     {
-        $databaseName = $this->getContainer()->getParameter('database_name');
-
-        if ('prod' !== $this->getEnvironment()) {
-            $databaseName = sprintf('%s_%s', $databaseName, $this->getEnvironment());
-        }
-
-        return $databaseName;
+        return $this->getContainer()->getParameter('database_name');
     }
 
     /**
