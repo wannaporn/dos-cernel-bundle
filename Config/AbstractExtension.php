@@ -15,7 +15,7 @@ abstract class AbstractExtension extends AbstractResourceExtension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $this->configure($configs, $this->getBundleConfiguration(), $container,
+        return $this->configure($configs, $this->getBundleConfiguration(), $container,
             self::CONFIGURE_LOADER |
             self::CONFIGURE_DATABASE |
             self::CONFIGURE_PARAMETERS |
