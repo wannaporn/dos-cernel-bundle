@@ -73,7 +73,7 @@ class Cernel extends Kernel
             new \HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new \WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
-            new \Problematic\AclManagerBundle\ProblematicAclManagerBundle(),
+            new \Oneup\AclBundle\OneupAclBundle(),
 
             //new \Helthe\Bundle\TurbolinksBundle\HeltheTurbolinksBundle(),
             new \Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
