@@ -67,13 +67,6 @@ class SettingsRequirements extends RequirementCollection
                 false
             ))
             ->add(new Requirement(
-                $translator->trans('dos.settings.detect_unicode', array(), 'requirements'),
-                !$this->isOn('detect_unicode'),
-                $on,
-                ini_get('detect_unicode'),
-                false
-            ))
-            ->add(new Requirement(
                 $translator->trans('dos.settings.short_open_tag', array(), 'requirements'),
                 !$this->isOn('short_open_tag'),
                 $off,
@@ -107,7 +100,6 @@ class SettingsRequirements extends RequirementCollection
     private function isOn($key)
     {
         $value = ini_get($key);
-
-        return false !== $value && 'off' !== $value;
+        return !empty($value) && false !== $value && 'off' !== strtolower($value);
     }
 }

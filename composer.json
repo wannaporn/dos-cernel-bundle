@@ -10,12 +10,12 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "liverbool/dos-resource-bundle": "0.15.*@dev"
+        "liverbool/dos-resource-bundle": "0.15.*@dev",
+        "sonata-project/easy-extends-bundle": "~2.1"
     },
     "require-dev": {
         "liil/kint": "1.0",
-        "phpspec/phpspec": "~2.1",
-        "sonata-project/easy-extends-bundle": "~2.1"
+        "phpspec/phpspec": "~2.1"
     },
     "autoload": {
         "psr-4": { "DoS\\CernelBundle\\": "" }
