@@ -10,8 +10,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "liverbool/dos-resource-bundle": "0.15.*@dev",
-        "sonata-project/easy-extends-bundle": "~2.1"
+        "liverbool/dos-resource-bundle": "0.15.*@dev"
     },
     "require-dev": {
         "liil/kint": "1.0",
