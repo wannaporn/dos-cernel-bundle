@@ -90,7 +90,6 @@ class Cernel extends Kernel
             $bundles[] = new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
             $bundles[] = new \Elao\WebProfilerExtraBundle\WebProfilerExtraBundle();
             $bundles[] = new \Hautelook\AliceBundle\HautelookAliceBundle();
-
         }
 
         return $bundles;
