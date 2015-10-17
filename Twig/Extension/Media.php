@@ -55,14 +55,18 @@ class Media extends SyliusImageExtension
     /**
      * {@inheritdoc}
      */
-    public function getImageUrl($image, $options = array(), $default = '')
+    public function getImageUrl($image, $options = array(), $default = null)
     {
         if (is_string($options)) {
+            $wh = null;
+
             // numeric only
             if (preg_match('/^([0-9]+)$/', $options)) {
+                $wh = $options .'x'. $options;
                 $options = sprintf('%s%sx%s',$this->filterPrefix, $options, $options);
                 // numeric x numeric
             } elseif (preg_match('/^([0-9]+)x([0-9]+)$/', $options)) {
+                $wh = $options;
                 $options = sprintf('%s%s', $this->filterPrefix, $options);
             } else {
                 // nothing
@@ -71,6 +75,14 @@ class Media extends SyliusImageExtension
             $options = array(
                 'imagine_filter' => $options
             );
+
+            if (null !== $wh && null === $default) {
+                $default = 'https://placehold.it/' . $wh;
+            }
+        }
+
+        if (null === $image) {
+            return $default;
         }
 
         return str_replace(
