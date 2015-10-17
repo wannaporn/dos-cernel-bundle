@@ -77,7 +77,7 @@ class Media extends SyliusImageExtension
             );
 
             if (null !== $wh && null === $default) {
-                $default = 'https://placehold.it/' . $wh;
+                $default = 'https://placehold.it/' . $wh .'.jpg';
             }
         }
 
