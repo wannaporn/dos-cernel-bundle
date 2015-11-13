@@ -76,9 +76,11 @@ class SlideshowBlockType extends BaseSlideshowBlockType
                     return;
                 }
 
-                foreach($data['children'] as $i => &$children) {
+                $i = 0;
+                foreach($data['children'] as &$children) {
                     $children['filter'] = $data['filter'];
                     $children['name'] = $data['name'] .'-'. $i;
+                    $i++;
                 }
 
                 $event->setData($data);
