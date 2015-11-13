@@ -12,6 +12,7 @@
         <parameter key="dos.cmf.form.image.type.class">DoS\CernelBundle\Form\Type\ImageType</parameter>
         <parameter key="dos.cmf.persistence.phpcr.manager.class">DoS\CernelBundle\Doctrine\Phpcr\MediaManager</parameter>
         <parameter key="dos.cmf.twig.extension.media.class">DoS\CernelBundle\Twig\Extension\Media</parameter>
+        <parameter key="dos.cmf.routing.listener.auto_route_content">DoS\CernelBundle\EventListener\CmfContentAutoRouting</parameter>
     </parameters>
 
     <services>
@@ -84,6 +85,15 @@
                 <argument>%cmf_routing.dynamic.persistence.phpcr.route_basepath%</argument>
             </argument>
             <tag name="doctrine_phpcr.initializer"/>
+        </service>
+
+        <service id="dos.cmf_routing.auto_route_content" class="%dos.cmf.routing.listener.auto_route_content%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="kernel.event_listener" event="sylius.static_content.post_create" method="postPersist" />
+            <tag name="kernel.event_listener" event="sylius.static_content.post_update" method="postUpdate" />
+            <tag name="kernel.event_listener" event="sylius.static_content.post_delete" method="postRemove" />
         </service>
     </services>
 </container>
