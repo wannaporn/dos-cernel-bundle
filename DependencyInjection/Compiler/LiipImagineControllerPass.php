@@ -23,5 +23,4 @@ class LiipImagineControllerPass implements CompilerPassInterface
 
         $container->setParameter('liip_imagine.controller.class', 'dos.liip_imagine.controller.class');
     }
-
 }
