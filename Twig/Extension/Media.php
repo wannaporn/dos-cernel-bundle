@@ -2,30 +2,55 @@
 
 namespace DoS\CernelBundle\Twig\Extension;
 
-use Sylius\Bundle\MediaBundle\Twig\Extension\SyliusImageExtension;
+use Liip\ImagineBundle\Templating\Helper\ImagineHelper;
+use Sylius\Component\Media\Model\ImageInterface;
+use Symfony\Cmf\Bundle\MediaBundle\MediaManagerInterface;
+use Symfony\Cmf\Bundle\MediaBundle\ImageInterface as MediaInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class Media extends SyliusImageExtension
+class Media extends \Twig_Extension
 {
     /**
      * @var string
      * @see liip_imagine.filters
      */
-    protected $filterPrefix = 'size_';
+    protected $filterName = 'sizing';
 
     /**
-     * @var string
-     * @see Resources/routing/liip_imagine.xml
+     * @var UrlGeneratorInterface
      */
-    protected $routePrefix = '/m/c/r/';
+    protected $generator;
 
     /**
-     * @param string $filterPrefix
-     * @param string $routePrefix
+     * @var MediaManagerInterface
      */
-    public function setPrefixs($filterPrefix, $routePrefix)
+    protected $mediaManager;
+
+    /**
+     * @var ImagineHelper
+     */
+    protected $imagineHelper;
+
+    /**
+     * Constructor.
+     *
+     * @param MediaManagerInterface $mediaManager
+     * @param UrlGeneratorInterface $router        A Router instance
+     * @param ImagineHelper         $imagineHelper Imagine helper to use if available
+     */
+    public function __construct(MediaManagerInterface $mediaManager, UrlGeneratorInterface $router, ImagineHelper $imagineHelper = null)
     {
-        $this->filterPrefix = $filterPrefix;
-        $this->routePrefix = $routePrefix;
+        $this->mediaManager  = $mediaManager;
+        $this->generator     = $router;
+        $this->imagineHelper = $imagineHelper;
+    }
+
+    /**
+     * @param string $filterName
+     */
+    public function setPrefixs($filterName)
+    {
+        $this->filterName = $filterName;
     }
 
     /**
@@ -55,7 +80,7 @@ class Media extends SyliusImageExtension
     /**
      * {@inheritdoc}
      */
-    public function getImageUrl($image, $options = array(), $default = null)
+    public function getImageUrl($image = null, $options = array(), $default = null)
     {
         if (is_string($options)) {
             $wh = null;
@@ -63,17 +88,21 @@ class Media extends SyliusImageExtension
             // numeric only
             if (preg_match('/^([0-9]+)$/', $options)) {
                 $wh = $options .'x'. $options;
-                $options = sprintf('%s%sx%s',$this->filterPrefix, $options, $options);
                 // numeric x numeric
             } elseif (preg_match('/^([0-9]+)x([0-9]+)$/', $options)) {
                 $wh = $options;
-                $options = sprintf('%s%s', $this->filterPrefix, $options);
             } else {
                 // nothing
             }
 
             $options = array(
-                'imagine_filter' => $options
+                'imagine_filter' => $this->filterName,
+                'runtime_config' => array(
+                    'thumbnail' => array(
+                        "size" => explode('x', $wh),
+                        "mode" => 'inset',
+                    )
+                ),
             );
 
             if (null !== $wh && null === $default) {
@@ -85,11 +114,37 @@ class Media extends SyliusImageExtension
             return $default;
         }
 
-        return str_replace(
-            $this->routePrefix . $this->filterPrefix,
-            $this->routePrefix,
-            parent::getImageUrl($image, $options, $default)
-        );
+        if ($image instanceof ImageInterface) {
+            $media = $image->getMedia();
+        } else {
+            $media = $image;
+        }
+
+        return $media ? $this->displayUrl($media, $options) : $default;
+    }
+
+    /**
+     * Generates a display URL from the given image.
+     *
+     * @param MediaInterface $file
+     * @param array          $options
+     * @param Boolean|string $referenceType The type of reference (one of the constants in UrlGeneratorInterface)
+     *
+     * @return string The generated URL
+     */
+    protected function displayUrl(MediaInterface $file, array $options = array(), $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
+    {
+        $urlSafePath = $this->mediaManager->getUrlSafePath($file);
+
+        if ($this->imagineHelper && isset($options['imagine_filter']) && is_string($options['imagine_filter'])) {
+            return $this->imagineHelper->filter(
+                $urlSafePath,
+                $options['imagine_filter'],
+                !empty($options['runtime_config']) ? $options['runtime_config'] : array()
+            );
+        }
+
+        return $this->generator->generate('cmf_media_image_display', array('path' => $urlSafePath), $referenceType);
     }
 
     /**

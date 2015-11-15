@@ -26,7 +26,10 @@
             </call>
         </service>
 
-        <service id="dos.cmf.twig.extension.media" class="%dos.cmf.twig.extension.media.class%" parent="sylius.twig.extension.image">
+        <service id="dos.cmf.twig.extension.media" class="%dos.cmf.twig.extension.media.class%">
+            <argument type="service" id="cmf_media.persistence.phpcr.manager" />
+            <argument type="service" id="router" />
+            <argument type="service" id="liip_imagine.templating.helper" />
             <tag name="twig.extension"/>
         </service>
 

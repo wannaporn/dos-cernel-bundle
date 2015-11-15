@@ -12,7 +12,5 @@
             >
 
         <field name="filter" type="string" nullable="true"/>
-
     </document>
-
 </doctrine-mapping>

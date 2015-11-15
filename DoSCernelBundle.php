@@ -22,7 +22,6 @@ class DoSCernelBundle extends AbstractBundle
      */
     public function build(ContainerBuilder $builder)
     {
-        $builder->addCompilerPass(new Compiler\LiipImagineControllerPass());
         $builder->addCompilerPass(new Compiler\CmfPass());
     }
 
