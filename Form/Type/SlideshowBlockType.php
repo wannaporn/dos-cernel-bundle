@@ -32,17 +32,10 @@ class SlideshowBlockType extends BaseSlideshowBlockType
      */
     public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
-        $filters = array();
-
-        foreach (array_keys($this->filterConfiguration->all()) as $filter) {
-            $filters[$filter] = $filter;
-        }
-
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('filter', 'choice', array(
-                'choices' => $filters,
+            ->add('filter', 'text', array(
                 'label' => 'sylius.form.imagine_block.filter',
                 'required' => false,
             ))
