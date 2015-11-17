@@ -8,11 +8,6 @@ use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock as BaseSlidesho
 class SlideshowBlock extends BaseSlideshowBlock
 {
     /**
-     * @var bool
-     */
-    protected $publishable = false;
-
-    /**
      * @var string
      */
     protected $filter;

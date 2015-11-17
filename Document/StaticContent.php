@@ -6,5 +6,4 @@ use Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent as BaseStaticC
 
 class StaticContent extends BaseStaticContent
 {
-    protected $publishable = false;
 }

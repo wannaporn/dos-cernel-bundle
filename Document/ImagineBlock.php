@@ -6,5 +6,4 @@ use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock as BaseImagineBlo
 
 class ImagineBlock extends BaseImagineBlock
 {
-    protected $publishable = false;
 }
