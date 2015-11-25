@@ -29,7 +29,7 @@ class CmfContentAutoRouting extends ContainerAware
         }
 
         /** @var Route $document */
-        $document = $this->container->get('sylius.repository.route')->createNew();
+        $document = $this->container->get('sylius.factory.route')->createNew();
         $document->setParentDocument($dm->find(null, $prefix));
         $document->setName($object->getName());
         $document->setContent($object);
