@@ -2,6 +2,7 @@
 
 namespace DoS\CernelBundle\Twig\Extension;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Liip\ImagineBundle\Templating\Helper\ImagineHelper;
 use Sylius\Component\Media\Model\ImageInterface;
 use Symfony\Cmf\Bundle\MediaBundle\MediaManagerInterface;
@@ -32,17 +33,24 @@ class Media extends \Twig_Extension
     protected $imagineHelper;
 
     /**
+     * @var ObjectManager
+     */
+    protected $documentManager;
+
+    /**
      * Constructor.
      *
      * @param MediaManagerInterface $mediaManager
      * @param UrlGeneratorInterface $router        A Router instance
      * @param ImagineHelper         $imagineHelper Imagine helper to use if available
+     * @param ObjectManager         $documentManager
      */
-    public function __construct(MediaManagerInterface $mediaManager, UrlGeneratorInterface $router, ImagineHelper $imagineHelper = null)
+    public function __construct(MediaManagerInterface $mediaManager, UrlGeneratorInterface $router, ImagineHelper $imagineHelper = null, $documentManager = null)
     {
         $this->mediaManager  = $mediaManager;
         $this->generator     = $router;
         $this->imagineHelper = $imagineHelper;
+        $this->documentManager = $documentManager;
     }
 
     /**
@@ -116,6 +124,14 @@ class Media extends \Twig_Extension
 
         if ($image instanceof ImageInterface) {
             $media = $image->getMedia();
+
+            // small buggy fix when form was interuted by error
+            // object was not continue to `postload` of \Sylius\Bundle\MediaBundle\EventListener\ImageMediaReferenceListener
+            if (null === $media && $this->documentManager) {
+                if ($media = $this->documentManager->find(null, $image->getMediaId())) {
+                    $image->setMedia($media);
+                }
+            }
         } else {
             $media = $image;
         }
