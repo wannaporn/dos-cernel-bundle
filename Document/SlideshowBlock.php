@@ -13,6 +13,23 @@ class SlideshowBlock extends BaseSlideshowBlock
     protected $filter = '600x400';
 
     /**
+     * {@inheritdoc}
+     */
+    public function addChild(BlockInterface $child, $key = null)
+    {
+        $child->setParent($this);
+
+        if ($key != null) {
+
+            $this->children->set($key, $child);
+
+            return true;
+        }
+
+        return $this->children->add($child);
+    }
+
+    /**
      * Sets the Imagine filter which is going to be used
      *
      * @param string $filter

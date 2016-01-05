@@ -32,15 +32,30 @@ class SlideshowBlockType extends BaseSlideshowBlockType
      */
     public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
-        parent::buildForm($builder, $options);
-
         $builder
             ->add('filter', 'text', array(
                 'label' => 'sylius.form.imagine_block.filter',
                 'required' => false,
             ))
-
-            ->remove('publishStartDate')
+            ->add('parentDocument', null)
+            ->add('name', 'text', array(
+                'label' => 'sylius.form.slideshow_block.internal_name'
+            ))
+            ->add('title', 'text', array(
+                'label' => 'sylius.form.slideshow_block.title'
+            ))
+            ->add('children', 'collection', array(
+                'type' => 'sylius_imagine_block',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label' => false,
+                'button_add_label' => 'sylius.form.slideshow_block.add_slide',
+                'cascade_validation' => true,
+            ))
+            ->add('publishable', null, array(
+                'label' => 'sylius.form.slideshow_block.publishable'
+            ))
             ->add('publishStartDate', 'datetime', array(
                 'required' => false,
                 'html5' => false,
@@ -49,8 +64,6 @@ class SlideshowBlockType extends BaseSlideshowBlockType
                 'time_widget' => 'single_text',
                 'label' => 'sylius.form.slideshow_block.publish_start_date',
             ))
-
-            ->remove('publishEndDate')
             ->add('publishEndDate', 'datetime', array(
                 'required' => false,
                 'html5' => false,
