@@ -10,8 +10,7 @@ class SlideshowBlock extends BaseSlideshowBlock
     /**
      * @var string
      */
-    protected $filter;
-
+    protected $filter = '600x400';
 
     /**
      * Sets the Imagine filter which is going to be used
