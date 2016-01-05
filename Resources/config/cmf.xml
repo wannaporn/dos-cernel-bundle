@@ -9,9 +9,31 @@
         <parameter key="dos.cmf.dynamic_router.class">Symfony\Cmf\Component\Routing\DynamicRouter</parameter>
         <parameter key="dos.cmf.generator.class">DoS\CernelBundle\Routing\SyliusAwareGenerator</parameter>
         <parameter key="dos.cmf.route_provider.class">DoS\CernelBundle\Routing\RouteProvider</parameter>
+        <parameter key="dos.cmf.form.image.type.class">DoS\CernelBundle\Form\Type\ImageType</parameter>
+        <parameter key="dos.cmf.persistence.phpcr.manager.class">DoS\CernelBundle\Doctrine\Phpcr\MediaManager</parameter>
+        <parameter key="dos.cmf.twig.extension.media.class">DoS\CernelBundle\Twig\Extension\Media</parameter>
+        <parameter key="dos.cmf.routing.listener.auto_route_content">DoS\CernelBundle\EventListener\CmfContentAutoRouting</parameter>
     </parameters>
 
     <services>
+        <service id="dos.cmf.form.image.type" class="%dos.cmf.form.image.type.class%" parent="sylius.form.type.image">
+            <tag name="form.type" alias="dos_image" />
+            <call method="setUploadFileHelper">
+                <argument type="service" id="cmf_media.upload_file_helper"/>
+            </call>
+            <call method="setMediaRoot">
+                <argument>%cmf_media.persistence.phpcr.media_basepath%</argument>
+            </call>
+        </service>
+
+        <service id="dos.cmf.twig.extension.media" class="%dos.cmf.twig.extension.media.class%">
+            <argument type="service" id="cmf_media.persistence.phpcr.manager" />
+            <argument type="service" id="router" />
+            <argument type="service" id="liip_imagine.templating.helper" />
+            <argument type="service" id="doctrine_phpcr.odm.document_manager" />
+            <tag name="twig.extension"/>
+        </service>
+
         <service id="dos.cmf.dynamic_router" class="%dos.cmf.dynamic_router.class%">
             <argument type="service" id="router.request_context"/>
             <argument type="service" id="dos.cmf.nested_matcher" />
@@ -59,6 +81,23 @@
             <argument>_dos.cmf_entity</argument>
             <argument>_dos.cmf</argument>
             <argument>%dos.cmf_by_classes%</argument>
+        </service>
+
+        <service id="dos.cmf_routing.initializer" class="Doctrine\Bundle\PHPCRBundle\Initializer\GenericInitializer">
+            <argument>CmfRoutingBundle</argument>
+            <argument type="collection">
+                <argument>%cmf_routing.dynamic.persistence.phpcr.route_basepath%</argument>
+            </argument>
+            <tag name="doctrine_phpcr.initializer"/>
+        </service>
+
+        <service id="dos.cmf_routing.auto_route_content" class="%dos.cmf.routing.listener.auto_route_content%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="kernel.event_listener" event="sylius.static_content.post_create" method="postPersist" />
+            <tag name="kernel.event_listener" event="sylius.static_content.post_update" method="postUpdate" />
+            <tag name="kernel.event_listener" event="sylius.static_content.post_delete" method="postRemove" />
         </service>
     </services>
 </container>

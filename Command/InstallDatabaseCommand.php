@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class InstallDatabaseCommand extends AbstractInstallCommand
 {
     private $infos = array(
-        1 => 'Creating Sylius database for environment <info>%s</info>.',
+        1 => 'Creating database for environment <info>%s</info>.',
         2 => '<question>It appears that your database already exists. Would you like to reset it? (y/N)</question> ',
         3 => '<question>Seems like your database contains schema. Do you want to reset it? (y/N)</question> '
     );
@@ -122,13 +122,7 @@ EOT
      */
     private function getDatabaseName()
     {
-        $databaseName = $this->getContainer()->getParameter('database_name');
-
-        if ('prod' !== $this->getEnvironment()) {
-            $databaseName = sprintf('%s_%s', $databaseName, $this->getEnvironment());
-        }
-
-        return $databaseName;
+        return $this->getContainer()->getParameter('database_name');
     }
 
     /**

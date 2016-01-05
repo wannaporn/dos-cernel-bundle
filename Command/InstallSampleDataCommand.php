@@ -49,12 +49,13 @@ EOT
         $doctrineConfiguration->setSQLLogger(null);
 
         $commands = array(
-            'doctrine:fixtures:load' => array('--no-interaction' => true),
         );
 
         if ($this->getParameter('dos.cmf.enabled')) {
             $commands['doctrine:phpcr:fixtures:load'] = array('--no-interaction' => true);
         }
+
+        $commands['doctrine:fixtures:load'] = array('--no-interaction' => true);
 
         $this->runCommands($commands, $input, $output);
 

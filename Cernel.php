@@ -22,7 +22,6 @@ class Cernel extends Kernel
     public function registerBundles()
     {
         $bundles = array(
-            /*
             new \Sonata\BlockBundle\SonataBlockBundle(),
             new \Symfony\Cmf\Bundle\CoreBundle\CmfCoreBundle(),
             new \Symfony\Cmf\Bundle\BlockBundle\CmfBlockBundle(),
@@ -33,7 +32,6 @@ class Cernel extends Kernel
             new \Symfony\Cmf\Bundle\MediaBundle\CmfMediaBundle(),
             new \Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
             new \Sylius\Bundle\ContentBundle\SyliusContentBundle(),
-            */
 
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
@@ -45,6 +43,7 @@ class Cernel extends Kernel
 
             new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
+            new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
 
             new \DoS\CernelBundle\DoSCernelBundle(),
             new \DoS\ResourceBundle\DoSResourceBundle(),
@@ -75,7 +74,7 @@ class Cernel extends Kernel
             new \HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new \WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
-            new \Problematic\AclManagerBundle\ProblematicAclManagerBundle(),
+            new \Oneup\AclBundle\OneupAclBundle(),
 
             //new \Helthe\Bundle\TurbolinksBundle\HeltheTurbolinksBundle(),
             new \Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
@@ -88,11 +87,9 @@ class Cernel extends Kernel
             $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new \Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new \Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
-            $bundles[] = new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle();
             $bundles[] = new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
             $bundles[] = new \Elao\WebProfilerExtraBundle\WebProfilerExtraBundle();
             $bundles[] = new \Hautelook\AliceBundle\HautelookAliceBundle();
-
         }
 
         return $bundles;

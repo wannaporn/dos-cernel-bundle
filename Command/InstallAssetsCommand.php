@@ -34,13 +34,6 @@ EOT
             'assetic:dump',
         );
 
-        $rootDir = $this->getParameter('kernel.root_dir');
-        $filesystem = $this->get('filesystem');
-
-        $filesystem->symlink($rootDir . '/../web/bundles/ui', $rootDir . '/../web/ui');
-
-        // TODO: install ui asset
-
         $this->runCommands($commands, $input, $output);
     }
 }
