@@ -57,6 +57,10 @@ EOT
 
         $commands['doctrine:fixtures:load'] = array('--no-interaction' => true);
 
+        if (class_exists('Hautelook\AliceBundle\Doctrine\DataFixtures\AbstractLoader')) {
+            $commands['hautelook_alice:doctrine:fixtures:load'] = array('--no-interaction' => true);
+        }
+
         $this->runCommands($commands, $input, $output);
 
         $doctrineConfiguration->setSQLLogger($logger);
