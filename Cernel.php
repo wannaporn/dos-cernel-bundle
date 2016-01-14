@@ -22,6 +22,13 @@ class Cernel extends Kernel
     public function registerBundles()
     {
         $bundles = array(
+            new \FM\ElfinderBundle\FMElfinderBundle(),
+            new \Sylius\Bundle\MediaBundle\SyliusMediaBundle(),
+            new \DoS\QueueBundle\DoSQueueBundle(),
+            new \Uecode\Bundle\QPushBundle\UecodeQPushBundle(),
+            new \Cocur\Slugify\Bridge\Symfony\CocurSlugifyBundle(),
+            new \Sonata\SeoBundle\SonataSeoBundle(),
+
             new \Sonata\BlockBundle\SonataBlockBundle(),
             new \Symfony\Cmf\Bundle\CoreBundle\CmfCoreBundle(),
             new \Symfony\Cmf\Bundle\BlockBundle\CmfBlockBundle(),
@@ -80,6 +87,13 @@ class Cernel extends Kernel
             new \Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
 
             new \winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
+
+            new \CacheTool\Bundle\CacheToolBundle(),
+            new \Nelmio\CorsBundle\NelmioCorsBundle(),
+            new \Sylius\Bundle\ThemeBundle\SyliusThemeBundle(),
+            #new \YZ\SupervisorBundle\YZSupervisorBundle(),
+            new \BCC\CronManagerBundle\BCCCronManagerBundle(),
+            new \SunCat\MobileDetectBundle\MobileDetectBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
