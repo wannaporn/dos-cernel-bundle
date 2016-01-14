@@ -10,7 +10,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "liverbool/dos-resource-bundle": "0.16.*@dev"
+        "liverbool/dos-resource-bundle": "0.17.*"
     },
     "require-dev": {
         "liil/kint": "1.0",
@@ -27,7 +27,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.16-dev"
+            "dev-master": "0.17-dev"
         }
     }
 }
