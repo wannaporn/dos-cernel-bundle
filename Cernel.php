@@ -23,13 +23,12 @@ class Cernel extends Kernel
     {
         $bundles = array(
             new \FM\ElfinderBundle\FMElfinderBundle(),
-            new \Sylius\Bundle\MediaBundle\SyliusMediaBundle(),
-            new \DoS\QueueBundle\DoSQueueBundle(),
             new \Uecode\Bundle\QPushBundle\UecodeQPushBundle(),
             new \Cocur\Slugify\Bridge\Symfony\CocurSlugifyBundle(),
-            new \Sonata\SeoBundle\SonataSeoBundle(),
 
+            new \Sonata\SeoBundle\SonataSeoBundle(),
             new \Sonata\BlockBundle\SonataBlockBundle(),
+
             new \Symfony\Cmf\Bundle\CoreBundle\CmfCoreBundle(),
             new \Symfony\Cmf\Bundle\BlockBundle\CmfBlockBundle(),
             new \Symfony\Cmf\Bundle\ContentBundle\CmfContentBundle(),
@@ -37,8 +36,6 @@ class Cernel extends Kernel
             new \Symfony\Cmf\Bundle\MenuBundle\CmfMenuBundle(),
             new \Symfony\Cmf\Bundle\CreateBundle\CmfCreateBundle(),
             new \Symfony\Cmf\Bundle\MediaBundle\CmfMediaBundle(),
-            new \Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
-            new \Sylius\Bundle\ContentBundle\SyliusContentBundle(),
 
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
@@ -48,10 +45,12 @@ class Cernel extends Kernel
             new \Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new \Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
+            new \Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
             new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
             new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
 
+            new \DoS\QueueBundle\DoSQueueBundle(),
             new \DoS\CernelBundle\DoSCernelBundle(),
             new \DoS\ResourceBundle\DoSResourceBundle(),
             new \DoS\SettingsBundle\DoSSettingsBundle(),
@@ -60,6 +59,9 @@ class Cernel extends Kernel
             new \DoS\SMSBundle\DoSSMSBundle(),
             new \Misd\PhoneNumberBundle\MisdPhoneNumberBundle(),
 
+            new \Sylius\Bundle\PricingBundle\SyliusPricingBundle(),
+            new \Sylius\Bundle\ContentBundle\SyliusContentBundle(),
+            new \Sylius\Bundle\MediaBundle\SyliusMediaBundle(),
             new \Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new \Sylius\Bundle\MoneyBundle\SyliusMoneyBundle(),
             new \Sylius\Bundle\SettingsBundle\SyliusSettingsBundle(),
@@ -67,6 +69,7 @@ class Cernel extends Kernel
             new \Sylius\Bundle\RbacBundle\SyliusRbacBundle(),
             new \Sylius\Bundle\UserBundle\SyliusUserBundle(),
             new \Sylius\Bundle\ApiBundle\SyliusApiBundle(),
+            new \Sylius\Bundle\ThemeBundle\SyliusThemeBundle(),
 
             new \Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new \FOS\OAuthServerBundle\FOSOAuthServerBundle(),
@@ -90,7 +93,6 @@ class Cernel extends Kernel
 
             new \CacheTool\Bundle\CacheToolBundle(),
             new \Nelmio\CorsBundle\NelmioCorsBundle(),
-            new \Sylius\Bundle\ThemeBundle\SyliusThemeBundle(),
             #new \YZ\SupervisorBundle\YZSupervisorBundle(),
             new \BCC\CronManagerBundle\BCCCronManagerBundle(),
             new \SunCat\MobileDetectBundle\MobileDetectBundle(),
