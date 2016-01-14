@@ -7,5 +7,5 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 abstract class AbstractExtension extends AbstractResourceExtension
 {
-    protected $applicationName = 'mobo';
+    protected $applicationName = 'toro';
 }
