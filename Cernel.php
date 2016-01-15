@@ -63,7 +63,6 @@ class Cernel extends Kernel
             new \Sylius\Bundle\ContentBundle\SyliusContentBundle(),
             new \Sylius\Bundle\MediaBundle\SyliusMediaBundle(),
             new \Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
-            new \Sylius\Bundle\MoneyBundle\SyliusMoneyBundle(),
             new \Sylius\Bundle\SettingsBundle\SyliusSettingsBundle(),
             new \Sylius\Bundle\MailerBundle\SyliusMailerBundle(),
             new \Sylius\Bundle\RbacBundle\SyliusRbacBundle(),
