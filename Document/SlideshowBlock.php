@@ -3,9 +3,10 @@
 namespace DoS\CernelBundle\Document;
 
 use Sonata\BlockBundle\Model\BlockInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock as BaseSlideshowBlock;
 
-class SlideshowBlock extends BaseSlideshowBlock
+class SlideshowBlock extends BaseSlideshowBlock implements ResourceInterface
 {
     /**
      * @var string
