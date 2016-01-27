@@ -19,12 +19,10 @@ class SlideshowBlockType extends BaseSlideshowBlockType
      */
     public function __construct(
         $dataClass,
-        array $validationGroups,
-        FilterConfiguration $filterConfiguration
+        array $validationGroups
     ) {
         $this->dataClass = $dataClass;
         $this->validationGroups = $validationGroups;
-        $this->filterConfiguration = $filterConfiguration;
     }
 
     /**
