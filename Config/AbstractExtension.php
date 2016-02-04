@@ -7,5 +7,5 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 abstract class AbstractExtension extends AbstractResourceExtension
 {
-    protected $applicationName = 'c2g';
+    protected $applicationName = 'wallet';
 }
