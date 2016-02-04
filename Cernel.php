@@ -59,16 +59,7 @@ class Cernel extends Kernel
             new \DoS\SMSBundle\DoSSMSBundle(),
             new \Misd\PhoneNumberBundle\MisdPhoneNumberBundle(),
 
-            new \Payum\Bundle\PayumBundle\PayumBundle(),
-
             new \Sylius\Bundle\MoneyBundle\SyliusMoneyBundle(),
-            new \Sylius\Bundle\TaxonomyBundle\SyliusTaxonomyBundle(),
-            new \Sylius\Bundle\TranslationBundle\SyliusTranslationBundle(),
-            new \Sylius\Bundle\LocaleBundle\SyliusLocaleBundle(),
-            new \Sylius\Bundle\PaymentBundle\SyliusPaymentBundle(),
-            new \Sylius\Bundle\PayumBundle\SyliusPayumBundle(),
-            new \Sylius\Bundle\CurrencyBundle\SyliusCurrencyBundle(),
-            new \Sylius\Bundle\PricingBundle\SyliusPricingBundle(),
             new \Sylius\Bundle\ContentBundle\SyliusContentBundle(),
             new \Sylius\Bundle\MediaBundle\SyliusMediaBundle(),
             new \Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
@@ -76,21 +67,12 @@ class Cernel extends Kernel
             new \Sylius\Bundle\MailerBundle\SyliusMailerBundle(),
             new \Sylius\Bundle\RbacBundle\SyliusRbacBundle(),
             new \Sylius\Bundle\UserBundle\SyliusUserBundle(),
-            new \Sylius\Bundle\InventoryBundle\SyliusInventoryBundle(),
-            new \Sylius\Bundle\OrderBundle\SyliusOrderBundle(),
-            new \Sylius\Bundle\AddressingBundle\SyliusAddressingBundle(),
-            new \Sylius\Bundle\SequenceBundle\SyliusSequenceBundle(),
             new \Sylius\Bundle\ApiBundle\SyliusApiBundle(),
             new \Sylius\Bundle\ThemeBundle\SyliusThemeBundle(),
-            new \Sylius\Bundle\ChannelBundle\SyliusChannelBundle(),
-            new \Sylius\Bundle\TaxationBundle\SyliusTaxationBundle(),
-            new \Sylius\Bundle\PromotionBundle\SyliusPromotionBundle(),
-            new \Sylius\Bundle\CartBundle\SyliusCartBundle(),
 
             new \Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new \FOS\OAuthServerBundle\FOSOAuthServerBundle(),
             new \FOS\RestBundle\FOSRestBundle(),
-            new \FOS\CommentBundle\FOSCommentBundle(),
 
             new \Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
             new \Knp\Bundle\MenuBundle\KnpMenuBundle(),
@@ -107,7 +89,6 @@ class Cernel extends Kernel
             new \Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
 
             new \winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
-            new \A2lix\TranslationFormBundle\A2lixTranslationFormBundle(),
 
             new \CacheTool\Bundle\CacheToolBundle(),
             new \Nelmio\CorsBundle\NelmioCorsBundle(),
