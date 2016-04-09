@@ -34,7 +34,6 @@ class Cernel extends Kernel
             new \Sylius\Bundle\ContentBundle\SyliusContentBundle(),
 
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new \Symfony\Bundle\TwigBundle\TwigBundle(),
             new \Symfony\Bundle\MonologBundle\MonologBundle(),
             new \Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
@@ -59,6 +58,8 @@ class Cernel extends Kernel
             new \Sylius\Bundle\RbacBundle\SyliusRbacBundle(),
             new \Sylius\Bundle\UserBundle\SyliusUserBundle(),
             new \Sylius\Bundle\ApiBundle\SyliusApiBundle(),
+
+            new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
 
             new \Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new \FOS\OAuthServerBundle\FOSOAuthServerBundle(),
