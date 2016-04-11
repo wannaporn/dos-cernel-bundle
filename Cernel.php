@@ -47,7 +47,6 @@ class Cernel extends Kernel
             new \DoS\CernelBundle\DoSCernelBundle(),
             new \DoS\ResourceBundle\DoSResourceBundle(),
             new \DoS\UserBundle\DoSUserBundle(),
-            new \DoS\MailerBundle\DoSMailerBundle(),
             new \DoS\SMSBundle\DoSSMSBundle(),
             new \Misd\PhoneNumberBundle\MisdPhoneNumberBundle(),
 
