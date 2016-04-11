@@ -24,14 +24,4 @@ class DoSCernelBundle extends AbstractBundle
     {
         $builder->addCompilerPass(new Compiler\CmfPass());
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getModelInterfaces()
-    {
-        return array(
-            'DoS\CernelBundle\Model\MediaInterface' => 'sylius.model.image.class',
-        );
-    }
 }
